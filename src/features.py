@@ -1,0 +1,17 @@
+import pandas as pd
+import os
+
+def generate_features():
+    os.makedirs('data/features', exist_ok=True)
+    df = pd.read_csv('data/transformed/events.csv')
+    
+    # Add duration in minutes
+    df['duration_minutes'] = df['duration_seconds'] / 60.0
+    
+    # Add full weekday name
+    df['weekday'] = pd.to_datetime(df['date']).dt.day_name()
+    
+    df.to_csv('data/features/events.csv', index=False)
+
+if __name__ == '__main__':
+    generate_features()
