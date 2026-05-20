@@ -17,6 +17,8 @@ def clean_data():
     # Drop non-positive duration
     df = df[df['duration_seconds'] > 0]
 
+    df['duration_seconds'] = df['duration_seconds'].astype(int)
+
     # Normalize timestamp to ISO 8601 (YYYY-MM-DDTHH:MM:SS)
     df['timestamp'] = pd.to_datetime(df['timestamp'], format='mixed').dt.strftime('%Y-%m-%dT%H:%M:%S')
 
